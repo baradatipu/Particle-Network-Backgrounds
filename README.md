@@ -27,7 +27,7 @@
 
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/baradatipu/Particle-Network-Backgrounds.git]
+   git clone https://github.com/baradatipu/Particle-Network-Backgrounds.git
    ```
 2. Navigate to the project directory
 3. Open any HTML file in a modern web browser
