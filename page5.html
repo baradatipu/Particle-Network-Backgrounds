@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberpunk Network - Design 5</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #13111C;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            color: #fff;
+            text-align: center;
+            padding-top: 20vh;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #ff00ff;
+            text-shadow: 0 0 15px rgba(255,0,255,0.7);
+            letter-spacing: 3px;
+            font-weight: bold;
+        }
+
+        .nav {
+            margin-top: 30px;
+        }
+
+        .nav a {
+            color: #ff00ff;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 10px 20px;
+            border: 2px solid #ff00ff;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,0,255,0.4), transparent);
+            transition: 0.5s;
+        }
+
+        .nav a:hover::before {
+            left: 100%;
+        }
+
+        .nav a:hover {
+            background: rgba(255,0,255,0.1);
+            box-shadow: 0 0 20px rgba(255,0,255,0.5);
+            border-color: #ff69b4;
+        }
+
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ff00ff;
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            transition: all 0.2s ease;
+            transform: translate(-50%, -50%);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+
+        .cursor.active {
+            transform: translate(-50%, -50%) rotate(45deg);
+            background: rgba(255,0,255,0.3);
+        }
+
+        .cursor-dot {
+            width: 6px;
+            height: 6px;
+            background: #ff00ff;
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            transition: all 0.1s ease;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 15px rgba(255,0,255,0.8);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+    <div id="particles-js"></div>
+    
+    <div class="content">
+        <h1>Cyberpunk Network</h1>
+        <div class="nav">
+            <a href="index.html">Design 1</a>
+            <a href="page2.html">Design 2</a>
+            <a href="page3.html">Design 3</a>
+            <a href="page4.html">Design 4</a>
+            <a href="page6.html">Design 6</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Cyberpunk cursor effect
+        const cursor = document.querySelector('.cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
+        });
+
+        document.addEventListener('mousedown', () => cursor.classList.add('active'));
+        document.addEventListener('mouseup', () => cursor.classList.remove('active'));
+
+        // Cyberpunk-themed particles configuration
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 100, density: { enable: true, value_area: 800 } },
+                color: { value: ['#ff00ff', '#ff69b4', '#ff1493'] },
+                shape: { 
+                    type: ['edge', 'triangle'],
+                    stroke: { width: 0, color: '#000000' }
+                },
+                opacity: { 
+                    value: 0.6,
+                    random: true,
+                    anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
+                },
+                size: { 
+                    value: 3,
+                    random: true,
+                    anim: { enable: true, speed: 2, size_min: 0.3, sync: false }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#ff00ff',
+                    opacity: 0.3,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 4,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false,
+                    attract: { enable: true, rotateX: 600, rotateY: 1200 }
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: { enable: true, mode: 'bubble' },
+                    onclick: { enable: true, mode: 'push' },
+                    resize: true
+                },
+                modes: {
+                    bubble: {
+                        distance: 200,
+                        size: 6,
+                        duration: 0.3,
+                        opacity: 0.8,
+                        speed: 3
+                    },
+                    push: { particles_nb: 4 }
+                }
+            },
+            retina_detect: true
+        });
+    </script>
+</body>
+</html>
